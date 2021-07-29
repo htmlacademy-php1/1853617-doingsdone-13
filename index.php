@@ -39,18 +39,70 @@ $show_complete_tasks = rand(0, 1);
         <div class="content">
             <section class="content__side">
                 <h2 class="content__side-heading">Проекты</h2>
-
+                <?php
+                $categories = [
+                    "Входящие", "Учеба", "Работа", "Домашние дела", "Авто",
+                ];
+                ?>
+                <?php
+                $affairs = [
+                [
+                'task' => 'Собеседование в IT компании',
+                'Date' => '01.12.2019',
+                'Category' => 'Работа',
+                'Completed' => 'false'
+                ],
+                [
+                'task' => 'Выполнить тестовое задание',
+                'Date' => '25.12.2019',
+                'Category' => 'Работа',
+                'Completed' => 'false'
+                ],
+                [
+                'task' => 'Сделать задание первого раздела',
+                'Date' => '21.12.2019',
+                'Category' => 'Учеба',
+                'Completed' => 'true'
+                ],
+                [
+                'task' => 'Встреча с другом',
+                'Date' => '22.12.2019',
+                'Category' => 'Входящие',
+                'Completed' => 'false'
+                ],
+                [
+                'task' => 'Купить корм для кота',
+                'Date' => 'null',
+                'Category' => 'Домашние дела',
+                'Completed' => 'false'
+                ],
+                [
+                'task' => 'Заказать пиццу',
+                'Date' => 'null',
+                'Category' => 'Домашние дела',
+                'Completed' => 'false'
+                ],
+                ];
+                ?>
                 <nav class="main-navigation">
                     <ul class="main-navigation__list">
+                        <?php $categories = ["Входящие", "Учеба", "Работа", "Домашние дела", "Авто"];  ?>
+                        <nav class="main-navigation">
+                            <?php foreach ($categories as $category): ?>
+
+                            <li class="main-navigation__list-item">
                         <li class="main-navigation__list-item">
-                            <a class="main-navigation__list-item-link" href="#">Название проекта</a>
+                            <a class="main-navigation__list-item-link" href="/category?"><?=$category;?></a>
                             <span class="main-navigation__list-item-count">0</span>
                         </li>
-                    </ul>
-                </nav>
 
+                            <?php endforeach; ?>
+                    </ul>
+
+                </nav>
                 <a class="button button--transparent button--plus content__side-button"
                    href="pages/form-project.html" target="project_add">Добавить проект</a>
+
             </section>
 
             <main class="content__main">
@@ -80,34 +132,68 @@ $show_complete_tasks = rand(0, 1);
 
                 <table class="tasks">
                     <tr class="tasks__item task">
-                        <td class="task__select">
-                            <label class="checkbox task__checkbox">
-                                <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
-                                <span class="checkbox__text">Сделать главную страницу Дела в порядке</span>
-                            </label>
-                        </td>
 
-                        <td class="task__file">
-                            <a class="download-link" href="#">Home.psd</a>
-                        </td>
+                        <?php $affairs = [
+                        [
+                        'task' => 'Собеседование в IT компании',
+                        'Date' => '01.12.2019',
+                        'Category' => 'Работа',
+                        'Completed' => 'false'
+                        ],
+                        [
+                        'task' => 'Выполнить тестовое задание',
+                        'Date' => '25.12.2019',
+                        'Category' => 'Работа',
+                        'Completed' => 'false'
+                        ],
+                        [
+                        'task' => 'Сделать задание первого раздела',
+                        'Date' => '21.12.2019',
+                        'Category' => 'Учеба',
+                        'Completed' => 'true'
+                        ],
+                        [
+                        'task' => 'Встреча с другом',
+                        'Date' => '22.12.2019',
+                        'Category' => 'Входящие',
+                        'Completed' => 'false'
+                        ],
+                        [
+                        'task' => 'Купить корм для кота',
+                        'Date' => 'null',
+                        'Category' => 'Домашние дела',
+                        'Completed' => 'false'
+                        ],
+                        [
+                        'task' => 'Заказать пиццу',
+                        'Date' => 'null',
+                        'Category' => 'Домашние дела',
+                        'Completed' => 'false'
+                        ],
+                        ];
+                        ?>
+                        <table class="tasks">
+                            <tr class="tasks__item task">
+                            </tr>
+                            <?php foreach ($affairs as $category => $val): ?>
+                            <tr class="tasks__item task">
+                                <td class="task__select">
+                                    <a href="/task/view?id=<?=$val['id'];?>"><?=$val['task'];?></a>
+                                </td>
+                                <td class="task__select">
+                                    <a href="/Date/view?id=<?=$val['id'];?>"><?=$val['Date'];?></a>
+                                </td>
+                                <td class="task__select">
+                                    <a href="/Category/view?id=<?=$val['id'];?>"><?=$val['Category'];?></a>
+                                </td>
+                                <td class="task__select">
+                                    <a href="/Completed/view?id=<?=$val['id'];?>"><?=$val['Completed'];?></a>
+                                </td>
+                            </tr>
 
-                        <td class="task__date"></td>
-                    </tr>
-                    <!--показывать следующий тег <tr/>, если переменная $show_complete_tasks равна единице-->
-                    <?php if ($show_complete_tasks === 1):?>
-                    <tr class="tasks__item task task--completed">
-                        <td class="task__select">
-                            <label class="checkbox task__checkbox">
-                                <input class="checkbox__input visually-hidden" type="checkbox" checked>
-                                <span class="checkbox__text">Записаться на интенсив "Базовый PHP"</span>
-                            </label>
-                        </td>
-                        <td class="task__date">10.10.2019</td>
+                            <?php endforeach; ?>
 
-                        <td class="task__controls">
-                        </td>
-                    </tr>
-                    <?php endif; ?>
+                        </table>
                 </table>
             </main>
         </div>
