@@ -135,9 +135,9 @@ $show_complete_tasks = rand(0, 1);
                             <td class="task__select">
                                 <label class="checkbox task__checkbox">
 
-                                    <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1" <?php if ($task['Completed'] === true) : ?>checked<?php endif; ?>>
+                                    <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1" <?php if ($task['completed'] === true) :?> checked<?php endif; ?>>
                                     <span class="checkbox__text"><?=$task['task'];?></span>
-                                    <?php if ($task['completed'] === true) : ?>checked<?php endif; ?>
+                                    
                             <td class="task__file">
                                 </label>
 
