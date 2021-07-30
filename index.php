@@ -48,40 +48,40 @@ $show_complete_tasks = rand(0, 1);
                 $affairs = [
                 [
                 'task' => 'Собеседование в IT компании',
-                'Date' => '01.12.2019',
-                'Category' => 'Работа',
-                'Completed' => 'false'
+                'date' => '01.12.2019',
+                'category' => 'Работа',
+                'completed' => false
                 ],
                 [
                 'task' => 'Выполнить тестовое задание',
-                'Date' => '25.12.2019',
-                'Category' => 'Работа',
-                'Completed' => 'false'
+                'date' => '25.12.2019',
+                'category' => 'Работа',
+                'completed' => false
                 ],
                 [
                 'task' => 'Сделать задание первого раздела',
-                'Date' => '21.12.2019',
-                'Category' => 'Учеба',
-                'Completed' => 'true'
+                'date' => '21.12.2019',
+                'category' => 'Учеба',
+                'completed' => true
                 ],
                 [
                 'task' => 'Встреча с другом',
-                'Date' => '22.12.2019',
-                'Category' => 'Входящие',
-                'Completed' => 'false'
+                'date' => '22.12.2019',
+                'category' => 'Входящие',
+                'completed' => false
                 ],
                 [
                 'task' => 'Купить корм для кота',
-                'Date' => 'null',
-                'Category' => 'Домашние дела',
-                'Completed' => 'false'
+                'date' => null,
+                'category' => 'Домашние дела',
+                'completed' => false
                 ],
                 [
                 'task' => 'Заказать пиццу',
-                'Date' => 'null',
-                'Category' => 'Домашние дела',
-                'Completed' => 'false'
-                ],
+                'date' => null,
+                'category' => 'Домашние дела',
+                'completed' => false
+                ]
                 ];
                 ?>
                 <nav class="main-navigation">
@@ -89,8 +89,6 @@ $show_complete_tasks = rand(0, 1);
                         <?php $categories = ["Входящие", "Учеба", "Работа", "Домашние дела", "Авто"];  ?>
                         <nav class="main-navigation">
                             <?php foreach ($categories as $category): ?>
-
-                            <li class="main-navigation__list-item">
                         <li class="main-navigation__list-item">
                             <a class="main-navigation__list-item-link" href="/category?"><?=$category;?></a>
                             <span class="main-navigation__list-item-count">0</span>
@@ -131,70 +129,27 @@ $show_complete_tasks = rand(0, 1);
                 </div>
 
                 <table class="tasks">
-                    <tr class="tasks__item task">
+                    <?php foreach ($affairs as $task): ?>
+                        <?php if ($show_complete_tasks === 0 && $task['completed'] === true): ?><?continue;?><?php endif; ?>
+                        <tr class="tasks__item task <?php if ($task['completed'] === true): ?>task--completed<?php endif; ?>">
+                            <td class="task__select">
+                                <label class="checkbox task__checkbox">
 
-                        <?php $affairs = [
-                        [
-                        'task' => 'Собеседование в IT компании',
-                        'Date' => '01.12.2019',
-                        'Category' => 'Работа',
-                        'Completed' => 'false'
-                        ],
-                        [
-                        'task' => 'Выполнить тестовое задание',
-                        'Date' => '25.12.2019',
-                        'Category' => 'Работа',
-                        'Completed' => 'false'
-                        ],
-                        [
-                        'task' => 'Сделать задание первого раздела',
-                        'Date' => '21.12.2019',
-                        'Category' => 'Учеба',
-                        'Completed' => 'true'
-                        ],
-                        [
-                        'task' => 'Встреча с другом',
-                        'Date' => '22.12.2019',
-                        'Category' => 'Входящие',
-                        'Completed' => 'false'
-                        ],
-                        [
-                        'task' => 'Купить корм для кота',
-                        'Date' => 'null',
-                        'Category' => 'Домашние дела',
-                        'Completed' => 'false'
-                        ],
-                        [
-                        'task' => 'Заказать пиццу',
-                        'Date' => 'null',
-                        'Category' => 'Домашние дела',
-                        'Completed' => 'false'
-                        ],
-                        ];
-                        ?>
-                        <table class="tasks">
-                            <tr class="tasks__item task">
-                            </tr>
-                            <?php foreach ($affairs as $category => $val): ?>
-                            <tr class="tasks__item task">
-                                <td class="task__select">
-                                    <a href="/task/view?id=<?=$val['id'];?>"><?=$val['task'];?></a>
-                                </td>
-                                <td class="task__select">
-                                    <a href="/Date/view?id=<?=$val['id'];?>"><?=$val['Date'];?></a>
-                                </td>
-                                <td class="task__select">
-                                    <a href="/Category/view?id=<?=$val['id'];?>"><?=$val['Category'];?></a>
-                                </td>
-                                <td class="task__select">
-                                    <a href="/Completed/view?id=<?=$val['id'];?>"><?=$val['Completed'];?></a>
-                                </td>
-                            </tr>
+                                    <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1" <?php if ($task['Completed'] === true) : ?>checked<?php endif; ?>>
+                                    <span class="checkbox__text"><?=$task['task'];?></span>
+                                    <?php if ($task['completed'] === true) : ?>checked<?php endif; ?>
+                            <td class="task__file">
+                                </label>
 
+                            <td class="task__file">
+                            </td>
+                            <td class="task__file">
+                                <a class="download-link" href="#">Home.psd</a>
+                            </td>
+                            <td class="task__date"><?=$task['date'];?></td>
+                        </tr>
                             <?php endforeach; ?>
-
                         </table>
-                </table>
             </main>
         </div>
     </div>
