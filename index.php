@@ -46,15 +46,17 @@ $affairs = [
     ]
 ];
 
-function tallyyy($project, $airs) {
-    $numb = 0;
-    foreach($airs as $task) {
-        if($project == $task['category']) {
-            $numb ++;
+function calculateTasksCount(string $project, array $tasks):int
+{
+    $number = 0;
+    foreach($tasks as $task) {
+        if($project === $task['category']) {
+            $number ++;
         }
     };
-    return $numb;
+    return $number;
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -99,7 +101,7 @@ function tallyyy($project, $airs) {
                             <?php foreach ($categories as $category): ?>
                         <li class="main-navigation__list-item">
                             <a class="main-navigation__list-item-link" href="/category?"><?=$category;?></a>
-                            <span class="main-navigation__list-item-count"><?= tallyyy($category, $affairs) ?></span>
+                            <span class="main-navigation__list-item-count"><?= calculateTasksCount($category, $affairs) ?></span>
                         </li>
 
                             <?php endforeach; ?>
