@@ -2,6 +2,62 @@
 // показывать или нет выполненные задачи
 $show_complete_tasks = rand(0, 1);
 ?>
+<?php
+$categories = [
+    'Входящие', 'Учеба', 'Работа', 'Домашние дела', 'Авто',
+];
+
+$affairs = [
+    [
+        'task' => 'Собеседование в IT компании',
+        'date' => '01.12.2019',
+        'category' => 'Работа',
+        'completed' => false
+    ],
+    [
+        'task' => 'Выполнить тестовое задание',
+        'date' => '25.12.2019',
+        'category' => 'Работа',
+        'completed' => false
+    ],
+    [
+        'task' => 'Сделать задание первого раздела',
+        'date' => '21.12.2019',
+        'category' => 'Учеба',
+        'completed' => true
+    ],
+    [
+        'task' => 'Встреча с другом',
+        'date' => '22.12.2019',
+        'category' => 'Входящие',
+        'completed' => false
+    ],
+    [
+        'task' => 'Купить корм для кота',
+        'date' => null,
+        'category' => 'Домашние дела',
+        'completed' => false
+    ],
+    [
+        'task' => 'Заказать пиццу',
+        'date' => null,
+        'category' => 'Домашние дела',
+        'completed' => false
+    ]
+];
+
+function calculateTasksCount(string $project, array $tasks):int
+{
+    $number = 0;
+    foreach($tasks as $task) {
+        if($project === $task['category']) {
+            $number ++;
+        }
+    };
+    return $number;
+}
+
+?>
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -39,59 +95,13 @@ $show_complete_tasks = rand(0, 1);
         <div class="content">
             <section class="content__side">
                 <h2 class="content__side-heading">Проекты</h2>
-                <?php
-                $categories = [
-                    "Входящие", "Учеба", "Работа", "Домашние дела", "Авто",
-                ];
-                ?>
-                <?php
-                $affairs = [
-                [
-                'task' => 'Собеседование в IT компании',
-                'date' => '01.12.2019',
-                'category' => 'Работа',
-                'completed' => false
-                ],
-                [
-                'task' => 'Выполнить тестовое задание',
-                'date' => '25.12.2019',
-                'category' => 'Работа',
-                'completed' => false
-                ],
-                [
-                'task' => 'Сделать задание первого раздела',
-                'date' => '21.12.2019',
-                'category' => 'Учеба',
-                'completed' => true
-                ],
-                [
-                'task' => 'Встреча с другом',
-                'date' => '22.12.2019',
-                'category' => 'Входящие',
-                'completed' => false
-                ],
-                [
-                'task' => 'Купить корм для кота',
-                'date' => null,
-                'category' => 'Домашние дела',
-                'completed' => false
-                ],
-                [
-                'task' => 'Заказать пиццу',
-                'date' => null,
-                'category' => 'Домашние дела',
-                'completed' => false
-                ]
-                ];
-                ?>
                 <nav class="main-navigation">
                     <ul class="main-navigation__list">
-                        <?php $categories = ["Входящие", "Учеба", "Работа", "Домашние дела", "Авто"];  ?>
                         <nav class="main-navigation">
                             <?php foreach ($categories as $category): ?>
                         <li class="main-navigation__list-item">
                             <a class="main-navigation__list-item-link" href="/category?"><?=$category;?></a>
-                            <span class="main-navigation__list-item-count">0</span>
+                            <span class="main-navigation__list-item-count"><?= calculateTasksCount($category, $affairs) ?></span>
                         </li>
 
                             <?php endforeach; ?>
@@ -137,7 +147,7 @@ $show_complete_tasks = rand(0, 1);
 
                                     <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1" <?php if ($task['completed'] === true) :?> checked<?php endif; ?>>
                                     <span class="checkbox__text"><?=$task['task'];?></span>
-                                    
+
                             <td class="task__file">
                                 </label>
 
